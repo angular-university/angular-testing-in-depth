@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CoursesCardList } from './courses-card-list'; // Ensure correct class name
+import { CoursesCardList } from './courses-card-list';
 import { setupCourses } from '../../common/setup-test-data';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';

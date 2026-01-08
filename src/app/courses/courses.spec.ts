@@ -1,6 +1,6 @@
-import { ComponentFixture, fakeAsync, TestBed, flush } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Courses } from './courses';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { setupCourses } from './common/setup-test-data';
 import { signal } from '@angular/core';
 import { CoursesService } from './services/courses';
