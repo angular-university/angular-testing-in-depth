@@ -12,7 +12,7 @@
 }
 
 .modal-content {
-    padding: 1.88rem;
+    padding: 1.88rem 0.94em 0.94em 0.94em;
     width: 100%;
     max-width: 25rem;
     display: flex;
@@ -21,11 +21,13 @@
     border-radius: 0.75rem;
     background: #F3F3F3;
     box-shadow: 0 1px 25px 14px rgba(0, 0, 0, 0.25);
-    header{
+
+    header {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
     }
+
     header .modal-title {
         color: #3B3059;
         font-family: Inter;
@@ -34,7 +36,8 @@
         font-weight: 500;
         line-height: 1.375rem;
     }
-    header button.close-button{
+
+    header button.close-button {
         background: transparent;
         border: none;
         cursor: pointer;
@@ -60,11 +63,43 @@
             background-color: #FFF;
             height: 3.375rem;
             border: none;
+
+            color: #626069;
+            font-family: Inter;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.375rem;
+
+            &::placeholder {
+                color: #C4C4C4;
+            }
         }
 
         textarea {
-            height: 6.875rem;
+            height: 13.4375rem;
             resize: vertical;
+        }
+
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+
+            background-image: url("data:image/svg+xml;utf8,<svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M16.25 7.5L10 13.75L3.75 7.5' stroke='%23626069' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+            background-repeat: no-repeat;
+
+            background-position: right 1.19rem center;
+            background-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        select::-ms-expand {
+            display: none;
+        }
+
+        ::ng-deep input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
         }
     }
 }
@@ -73,7 +108,7 @@
     display: flex;
     justify-content: space-between;
     gap: 0.5rem;
-    margin-top: 1.19rem;
+    margin-top: 0.875rem;
 
     button {
         flex: 1;

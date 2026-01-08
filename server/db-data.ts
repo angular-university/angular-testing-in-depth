@@ -1,17 +1,17 @@
 export const COURSES: any = {
-
-  12: {
-    id: 12,
+  1: {
+    id: 1,
     titles: {
-      description: 'Angular Testing Course',
-      longDescription: 'In-depth guide to Unit Testing and E2E Testing of Angular Applications'
+      description: 'Angular Deep Dive Testing Course',
+      longDescription: 'This course provides a deep dive into the Angular testing ecosystem, covering everything from basic unit testing.'
     },
-    iconUrl: 'https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-testing-small.png',
-    category: 'BEGINNER',
-    seqNo: 0,
-    url: 'angular-testing-course',
+    iconUrl: '/angular-testing-in-depth-hero.png',
     lessonsCount: 10,
+    category: 'BEGINNER',
+    'seqNo': 0,
+    url: 'angular-testing-in-depth'
   },
+
 
   2: {
     id: 2,
@@ -22,7 +22,7 @@ export const COURSES: any = {
     iconUrl: 'https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-core-in-depth-small.png',
     lessonsCount: 10,
     category: 'BEGINNER',
-    seqNo: 1,
+    'seqNo': 1,
     url: 'angular-core-course'
   },
 
@@ -36,7 +36,7 @@ export const COURSES: any = {
     courseListIcon: 'https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png',
     category: 'BEGINNER',
     lessonsCount: 10,
-    seqNo: 2,
+    'seqNo': 2,
     url: 'rxjs-course'
   },
 
@@ -50,22 +50,11 @@ export const COURSES: any = {
     courseListIcon: 'https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png',
     category: 'BEGINNER',
     lessonsCount: 10,
-    seqNo: 3,
+    'seqNo': 3,
     url: 'ngrx-course'
   },
 
-  1: {
-    id: 1,
-    titles: {
-      description: 'Serverless Angular with Firebase Course',
-      longDescription: 'Serveless Angular with Firestore, Firebase Storage & Hosting, Firebase Cloud Functions & AngularFire'
-    },
-    iconUrl: 'https://s3-us-west-1.amazonaws.com/angular-university/course-images/serverless-angular-small.png',
-    lessonsCount: 10,
-    category: 'BEGINNER',
-    seqNo: 4,
-    url: 'serverless-angular'
-  },
+
 
   5: {
     id: 5,
@@ -77,7 +66,7 @@ export const COURSES: any = {
     courseListIcon: 'https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png',
     category: 'BEGINNER',
     lessonsCount: 10,
-    seqNo: 5,
+    'seqNo': 4,
     url: 'angular-for-beginners'
   },
 
@@ -91,7 +80,7 @@ export const COURSES: any = {
     courseListIcon: 'https://s3-us-west-1.amazonaws.com/angular-university/course-images/lock-v2.png',
     category: 'ADVANCED',
     lessonsCount: 11,
-    seqNo: 6,
+    'seqNo': 5,
     url: 'angular-security-course'
   },
 
@@ -105,7 +94,7 @@ export const COURSES: any = {
     courseListIcon: 'https://s3-us-west-1.amazonaws.com/angular-university/course-images/alien.png',
     category: 'ADVANCED',
     lessonsCount: 8,
-    seqNo: 7,
+    'seqNo': 6,
     url: 'angular-pwa-course'
   },
 
@@ -118,7 +107,7 @@ export const COURSES: any = {
     iconUrl: 'https://angular-academy.s3.amazonaws.com/thumbnails/advanced_angular-small-v3.png',
     courseListIcon: 'https://angular-academy.s3.amazonaws.com/thumbnails/angular-advanced-lesson-icon.png',
     category: 'ADVANCED',
-    seqNo: 8,
+    'seqNo': 7,
     url: 'angular-advanced-course'
   },
 
@@ -131,7 +120,7 @@ export const COURSES: any = {
     iconUrl: 'https://angular-academy.s3.amazonaws.com/thumbnails/typescript-2-small.png',
     courseListIcon: 'https://angular-academy.s3.amazonaws.com/thumbnails/typescript-2-lesson.png',
     category: 'BEGINNER',
-    seqNo: 9,
+    'seqNo': 8,
     url: 'typescript-course'
   },
 
@@ -144,7 +133,7 @@ export const COURSES: any = {
     iconUrl: 'https://s3-us-west-1.amazonaws.com/angular-academy/blog/images/rxjs-reactive-patterns-small.png',
     courseListIcon: 'https://angular-academy.s3.amazonaws.com/course-logos/observables_rxjs.png',
     category: 'BEGINNER',
-    seqNo: 10,
+    'seqNo': 9,
     url: 'rxjs-patterns-course'
   },
 
@@ -156,9 +145,34 @@ export const COURSES: any = {
     },
     iconUrl: 'https://s3-us-west-1.amazonaws.com/angular-university/course-images/material_design.png',
     category: 'BEGINNER',
-    seqNo: 11,
+    'seqNo': 10,
     url: 'angular-material-course'
-  }
+  },
+
+  12: {
+    id: 12,
+    titles: {
+      description: 'Angular Testing Course',
+      longDescription: 'In-depth guide to Unit Testing and E2E Testing of Angular Applications'
+    },
+    iconUrl: 'https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-testing-small.png',
+    category: 'BEGINNER',
+    'seqNo': 11,
+    url: 'angular-testing-course',
+    lessonsCount: 10,
+  },
+  13: {
+    id: 13,
+    titles: {
+      description: 'Serverless Angular with Firebase Course',
+      longDescription: 'Serveless Angular with Firestore, Firebase Storage & Hosting, Firebase Cloud Functions & AngularFire'
+    },
+    iconUrl: 'https://s3-us-west-1.amazonaws.com/angular-university/course-images/serverless-angular-small.png',
+    lessonsCount: 10,
+    category: 'BEGINNER',
+    'seqNo': 12,
+    url: 'serverless-angular'
+  },
 
 };
 
@@ -388,7 +402,7 @@ export const LESSONS = {
     description: 'Development Environment Setup',
     'duration': '5:38',
     'seqNo': 1,
-    courseId: 1
+    courseId: 13
   },
 
   31: {
@@ -396,7 +410,7 @@ export const LESSONS = {
     description: 'Introduction to the Firebase Ecosystem',
     'duration': '5:12',
     'seqNo': 2,
-    courseId: 1
+    courseId: 13
   },
 
   32: {
@@ -404,7 +418,7 @@ export const LESSONS = {
     description: 'Importing Data into Firestore',
     'duration': '4:07',
     'seqNo': 3,
-    courseId: 1
+    courseId: 13
   },
 
   33: {
@@ -412,7 +426,7 @@ export const LESSONS = {
     description: 'Firestore Documents in Detail',
     'duration': '7:32',
     'seqNo': 4,
-    courseId: 1
+    courseId: 13
   },
 
   34: {
@@ -420,7 +434,7 @@ export const LESSONS = {
     description: 'Firestore Collections in Detail',
     'duration': '6:28',
     'seqNo': 5,
-    courseId: 1
+    courseId: 13
   },
 
   35: {
@@ -428,7 +442,7 @@ export const LESSONS = {
     description: 'Firestore Unique Identifiers',
     'duration': '4:38',
     'seqNo': 6,
-    courseId: 1
+    courseId: 13
   },
 
   36: {
@@ -436,7 +450,7 @@ export const LESSONS = {
     description: 'Querying Firestore Collections',
     'duration': '7:54',
     'seqNo': 7,
-    courseId: 1
+    courseId: 13
   },
 
   37: {
@@ -444,7 +458,7 @@ export const LESSONS = {
     description: 'Firebase Security Rules In Detail',
     'duration': '5:31',
     'seqNo': 8,
-    courseId: 1
+    courseId: 13
   },
 
   38: {
@@ -452,7 +466,7 @@ export const LESSONS = {
     description: 'Firebase Cloud Functions In Detail',
     'duration': '8:19',
     'seqNo': 9,
-    courseId: 1
+    courseId: 13
   },
 
   39: {
@@ -460,7 +474,7 @@ export const LESSONS = {
     description: 'Firebase Storage In Detail',
     'duration': '7:05',
     'seqNo': 10,
-    courseId: 1
+    courseId: 13
   },
 
 
@@ -544,9 +558,88 @@ export const LESSONS = {
     'duration': '7:05',
     'seqNo': 10,
     courseId: 12
+  },
+
+  // Angular Deep Dive Testing Course  
+  50: {
+    id: 50,
+    description: 'Unit Testing Services in Angular',
+    'duration': '6:45',
+    'seqNo': 1,
+    courseId: 1
+  },
+
+  51: {
+    id: 51,
+    description: 'Testing Observables and Async Data',
+    'duration': '7:20',
+    'seqNo': 2,
+    courseId: 1
+  },
+
+  52: {
+    id: 52,
+    description: 'Testing Component Interaction',
+    'duration': '5:55',
+    'seqNo': 3,
+    courseId: 1
+  },
+
+  53: {
+    id: 53,
+    description: 'Router and Navigation Testing',
+    'duration': '6:50',
+    'seqNo': 4,
+    courseId: 1
+  },
+
+  54: {
+    id: 54,
+    description: 'Mocking HTTP Requests in Tests',
+    'duration': '7:15',
+    'seqNo': 5,
+    courseId: 1
+  },
+
+  55: {
+    id: 55,
+    description: 'Testing Forms and User Input',
+    'duration': '6:35',
+    'seqNo': 6,
+    courseId: 1
+  },
+
+  56: {
+    id: 56,
+    description: 'End-to-End Testing Overview',
+    'duration': '8:00',
+    'seqNo': 7,
+    courseId: 1
+  },
+
+  57: {
+    id: 57,
+    description: 'Advanced Component Testing Patterns',
+    'duration': '7:40',
+    'seqNo': 8,
+    courseId: 1
+  },
+
+  58: {
+    id: 58,
+    description: 'Debugging Tests and Common Pitfalls',
+    'duration': '6:55',
+    'seqNo': 9,
+    courseId: 1
+  },
+
+  59: {
+    id: 59,
+    description: 'Best Practices for Angular Testing',
+    'duration': '7:25',
+    'seqNo': 10,
+    courseId: 1
   }
-
-
 };
 
 
