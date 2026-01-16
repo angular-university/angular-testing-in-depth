@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-about-us',
@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './about-us.scss',
 })
 export class AboutUs {
-
+  title = signal('Welcome!');
+  subTitle = signal('Welcome to Angular Testing Course');
+  pageDescription = signal('Master the art of high-quality software delivery. This course provides a deep dive into the Angular testing ecosystem, covering everything from basic unit tests to complex integration scenarios with Signals and modern routing. Our goal is to empower developers to write maintainable, bug-free code with confidence.');
 }

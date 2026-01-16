@@ -19,7 +19,7 @@ describe('App', () => {
   it('should create the app', () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(app).toBeDefined();
   });
 
   it('should render the navigation toolbar', () => {

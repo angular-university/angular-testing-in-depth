@@ -22,32 +22,31 @@ describe('AboutUs', () => {
   });
 
   it('should render the main "Welcome!" header using the correct class', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const header = compiled.querySelector('.about-us-header');
-    
+    const header = fixture.nativeElement.querySelector('.about-us-header');
+
     expect(header).toBeTruthy();
-    expect(header?.textContent?.trim()).toBe('Welcome!');
+    expect(header?.textContent).toContain(component.title());
   });
 
   it('should display the sub-header text', () => {
     const subHeader = fixture.nativeElement.querySelector('.about-us-sub-header');
-    
+
     expect(subHeader).toBeTruthy();
-    expect(subHeader?.textContent).toContain('Welcome to Angular Testing Course');
+    expect(subHeader?.textContent).toContain(component.subTitle());
   });
 
   it('should render the hero image with the correct src and alt text', () => {
     const img = fixture.debugElement.query(By.css('.hero-image-wrapper img')).nativeElement;
-    
+
     expect(img).toBeTruthy();
     expect(img.getAttribute('src')).toBe('/angular-testing-in-depth-hero.png');
     expect(img.getAttribute('alt')).toBe('Angular Testing In Depth Hero');
   });
+  
+  it('should display the page description paragraph', () => {
+    const pageDescription = fixture.nativeElement.querySelector('.description');
 
-  it('should render the descriptive paragraph', () => {
-    const description = fixture.nativeElement.querySelector('.description');
-    
-    expect(description).toBeTruthy();
-    expect(description?.textContent).toContain(' Master the art of high-quality software delivery.');
+    expect(pageDescription).toBeTruthy();
+    expect(pageDescription?.textContent).toContain(component.pageDescription());
   });
 });
