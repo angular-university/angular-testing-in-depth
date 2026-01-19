@@ -1,8 +1,11 @@
 import { Component, signal } from '@angular/core';
+import {HelloWorld} from '../hello-world/hello-world';
 
 @Component({
   selector: 'app-about-us',
-  imports: [],
+  imports: [
+    HelloWorld
+  ],
   templateUrl: './about-us.html',
   styleUrl: './about-us.scss',
 })
