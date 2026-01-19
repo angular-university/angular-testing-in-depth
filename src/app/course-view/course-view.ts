@@ -1,13 +1,15 @@
-import { Component, computed, effect, ElementRef, inject, input, OnInit, signal, viewChild } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { Course } from '../model/course';
 import { Lesson } from '../model/leson';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../services/courses';
-import { debounceTime, distinctUntilChanged, fromEvent, Subject, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { HighlightDirective } from '../directives/appHighlight.directive';
+import { DurationFormatPipe } from '../pipes/durationFormat.pipe';
 
 @Component({
   selector: 'app-course-view',
-  imports: [],
+  imports: [DurationFormatPipe, HighlightDirective],
   templateUrl: './course-view.html',
   styleUrl: './course-view.scss',
 })
