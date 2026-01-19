@@ -41,10 +41,10 @@
             </thead>
             <tbody>
                 @for (lesson of lessons(); track lesson.id) {
-                <tr>
+                <tr appHighlight highlightColor="yellow">
                     <td>{{ lesson.seqNo }}</td>
                     <td class="description-cell">{{ lesson.description }}</td>
-                    <td class="duration-cell">{{ lesson.duration }}</td>
+                    <td class="duration-cell">{{ lesson.duration | durationFormat }}</td>
                 </tr>
                 } @empty {
                 <tr>

@@ -2,7 +2,7 @@
 
 import {Request, Response} from 'express';
 import {COURSES} from "./db-data";
-import { Course } from '../src/app/courses/model/course';
+import { Course } from '../src/app/model/course';
 
 export function getAllCourses(req: Request, res: Response) {
 

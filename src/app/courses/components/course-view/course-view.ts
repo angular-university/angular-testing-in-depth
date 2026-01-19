@@ -4,10 +4,12 @@ import { Lesson } from '../../model/leson';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../../services/courses';
 import { debounceTime, distinctUntilChanged, fromEvent, Subject, tap } from 'rxjs';
+import { HighlightDirective } from '../directives/appHighlight.directive';
+import { DurationFormatPipe } from '../pipes/durationFormat.pipe';
 
 @Component({
   selector: 'app-course-view',
-  imports: [],
+  imports: [DurationFormatPipe, HighlightDirective],
   templateUrl: './course-view.html',
   styleUrl: './course-view.scss',
 })
@@ -23,7 +25,7 @@ export class CourseView implements OnInit {
   pageIndex = signal(0);
   pageSize = signal(3);
   sortDirection = signal<'asc' | 'desc'>('asc');
-  sortField = signal('seqNo'); 
+  sortField = signal('seqNo');
   searchQuery = signal('');
   private searchSubject = new Subject<string>();
 
