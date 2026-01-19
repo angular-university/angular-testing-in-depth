@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { CoursesDialog } from './courses-dialog';
 import { of } from 'rxjs';
-import { CoursesService } from '../../services/courses';
+import { CoursesService } from '../services/courses';
 
 describe('CoursesDialog', () => {
   let component: CoursesDialog;

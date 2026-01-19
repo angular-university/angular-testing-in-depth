@@ -1,7 +1,7 @@
 import { Component, inject, input, output } from '@angular/core';
-import { Course } from '../../model/course';
+import { Course } from '../model/course';
 import { RouterLink } from '@angular/router';
-import { ModalService } from '../../services/modal.service';
+import { ModalService } from '../services/modal.service';
 import { CoursesDialog } from '../courses-dialog/courses-dialog';
 
 @Component({

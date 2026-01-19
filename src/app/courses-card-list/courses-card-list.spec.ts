@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoursesCardList } from './courses-card-list';
-import { setupCourses } from '../../common/setup-test-data';
+import { setupCourses } from '../common/setup-test-data';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { describe, it, expect, beforeEach } from 'vitest';

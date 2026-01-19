@@ -1,6 +1,6 @@
 import { Component, signal, computed, inject, OnInit } from '@angular/core';
-import { CoursesService } from './services/courses';
-import { CoursesCardList } from './components/courses-card-list/courses-card-list';
+import { CoursesCardList } from '../courses-card-list/courses-card-list';
+import { CoursesService } from '../services/courses';
 
 @Component({
   selector: 'app-courses',

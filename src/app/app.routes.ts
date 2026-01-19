@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { AboutUs } from './about-us/about-us';
 import { Courses } from './courses/courses';
-import { CourseView } from './courses/components/course-view/course-view';
-import { courseResolver } from './courses/services/course.resolver';
+import { CourseView } from './course-view/course-view';
+import { courseResolver } from './services/course.resolver';
 
 export const routes: Routes = [
     {

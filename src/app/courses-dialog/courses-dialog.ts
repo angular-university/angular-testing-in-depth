@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Course } from '../../model/course';
+import { Course } from '../model/course';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CoursesService } from '../../services/courses';
 import { tap } from 'rxjs';
+import { CoursesService } from '../services/courses';
 
 @Component({
   selector: 'app-courses-dialog',

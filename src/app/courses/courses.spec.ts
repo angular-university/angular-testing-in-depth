@@ -1,20 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Courses } from './courses';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { setupCourses } from './common/setup-test-data';
+import { setupCourses } from '../common/setup-test-data';
 import { signal } from '@angular/core';
-import { CoursesService } from './services/courses';
+import { CoursesService } from '../services/courses';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
-import { click } from './common/test-utils';
+import { click } from '../common/test-utils';
 import { provideRouter } from '@angular/router';
+import { Course } from '../model/course';
 describe('Courses Component', () => {
   let fixture: ComponentFixture<Courses>;
   let component: Courses;
   let mockCoursesService: any;
 
-  const beginnerCourses = setupCourses().filter(c => c.category === 'BEGINNER');
-  const advancedCourses = setupCourses().filter(c => c.category === 'ADVANCED');
+  const beginnerCourses = setupCourses().filter((courses:Course) => courses.category === 'BEGINNER');
+  const advancedCourses = setupCourses().filter((courses:Course) => courses.category === 'ADVANCED');
   const allCourses = setupCourses();
 
   beforeEach(async () => {

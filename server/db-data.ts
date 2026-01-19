@@ -1,17 +1,4 @@
 export const COURSES: any = {
-  // 1: {
-  //   id: 1,
-  //   titles: {
-  //     description: 'Angular Deep Dive Testing Course',
-  //     longDescription: 'This course provides a deep dive into the Angular testing ecosystem, covering everything from basic unit testing.'
-  //   },
-  //   iconUrl: '/angular-testing-in-depth-hero.png',
-  //   lessonsCount: 10,
-  //   category: 'BEGINNER',
-  //   'seqNo': 0,
-  //   url: 'angular-testing-in-depth'
-  // },
-
     1: {
     id: 1,
     titles: {

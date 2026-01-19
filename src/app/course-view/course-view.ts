@@ -1,8 +1,8 @@
 import { Component, computed, effect, ElementRef, inject, input, OnInit, signal, viewChild } from '@angular/core';
-import { Course } from '../../model/course';
-import { Lesson } from '../../model/leson';
+import { Course } from '../model/course';
+import { Lesson } from '../model/leson';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CoursesService } from '../../services/courses';
+import { CoursesService } from '../services/courses';
 import { debounceTime, distinctUntilChanged, fromEvent, Subject, tap } from 'rxjs';
 
 @Component({
