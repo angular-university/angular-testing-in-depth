@@ -27,11 +27,9 @@ describe('HelloWorld', () => {
   });
 
   it('should display message', async () => {
-
     const h1 = el.querySelector("h1")!;
     expect(h1).toBeDefined();
     expect(h1.textContent).toEqual(component.message);
-
   });
 
 });
