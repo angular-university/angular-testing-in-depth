@@ -1,5 +1,5 @@
 <div class="container">
-<app-tabs 
+<tabs
     [tabs]="courseTabs"
     [(value)]="activeTab"
     (tabChanged)="onTabChanged($event)" />
@@ -7,7 +7,7 @@
   <main class="tab-content">
     @if (activeTab() === 'beginner') {
       @if (beginnerCourses().length > 0) {
-        <app-courses-card-list 
+        <app-courses-card-list
           (courseEdited)="reloadCourses()"
           [courses]="beginnerCourses()"/>
       } @else {
