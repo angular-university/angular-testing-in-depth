@@ -1,25 +1,28 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Course } from '../model/course';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { tap } from 'rxjs';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CoursesService } from '../services/courses';
+import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-courses-dialog',
+  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './courses-dialog.html',
   styleUrl: './courses-dialog.scss',
 })
 export class CoursesDialog implements OnInit {
+  private fb = inject(FormBuilder);
+  private coursesService = inject(CoursesService);
+  
+  private dialogRef = inject(DialogRef<Course>); 
+  public data = inject<{ course: Course }>(DIALOG_DATA);
+
   course: Course;
-  form: any;
-  constructor(
-    private fb: FormBuilder,
-    private coursesService: CoursesService,
-    @Inject('DIALOG_DATA') public data: { course: Course },
-    @Inject('DIALOG_REF') private dialogRef: any
-  ) {
-    this.course = data.course;
+  form!: FormGroup;
+
+  constructor() {
+    this.course = this.data.course;
   }
 
   ngOnInit() {
@@ -36,9 +39,7 @@ export class CoursesDialog implements OnInit {
   }
 
   async save() {
-    if (this.form.invalid) {
-      return;
-    }
+    if (this.form.invalid) return;
 
     const val = this.form.value;
     const changes: Partial<Course> = {
@@ -51,7 +52,7 @@ export class CoursesDialog implements OnInit {
 
     try {
       await this.coursesService.saveCourse(this.course.id, changes);
-      this.dialogRef.close(this.form.value);
+      this.dialogRef.close(val);
     } catch (err) {
       console.error("Save failed", err);
     }

@@ -1,30 +1,31 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, input, output, inject } from '@angular/core';
 import { Course } from '../model/course';
-import { RouterLink } from '@angular/router';
-import { ModalService } from '../services/modal.service';
+import { Dialog } from '@angular/cdk/dialog';
 import { CoursesDialog } from '../courses-dialog/courses-dialog';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-courses-card-list',
   standalone: true,
-  imports: [RouterLink],
   templateUrl: './courses-card-list.html',
-  styleUrls: ['./courses-card-list.scss']
+  styleUrl: './courses-card-list.scss',
+  imports: [RouterLink],
 })
 export class CoursesCardList {
-  private modalService: ModalService = inject(ModalService);
   courses = input.required<Course[]>();
-
-  courseEdited = output<Course>();
+  courseEdited = output();
+  
+  private dialog = inject(Dialog);
 
   editCourse(course: Course) {
-    const modalRef = this.modalService.open(CoursesDialog, {
-      course: course
+    const dialogRef = this.dialog.open(CoursesDialog, {
+      width: '500px',
+      data: { course }
     });
 
-    modalRef.afterClosed().subscribe(result => {
+    dialogRef.closed.subscribe(result => {
       if (result) {
-        console.log('Saved data:', result);
+        this.courseEdited.emit();
       }
     });
   }
