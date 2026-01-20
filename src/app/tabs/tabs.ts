@@ -10,7 +10,7 @@ import { CourseCategory } from '../model/course';
 export class TabsComponent {
   tabs = input.required<TabData[]>();
 
-  value = model.required<string>();
+  value = model<string>();
 
   tabChanged = output<CourseCategory>();
 
