@@ -10,7 +10,7 @@ export class CoursesService {
   readonly allCourses = this.courses.asReadonly();
 
   // Helper to handle common fetch logic
-  private async fetchJson<T>(url: string, options?: RequestInit): Promise<T> {
+  private async fetchRequest<T>(url: string, options?: RequestInit): Promise<T> {
     const response = await fetch(url, options);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -19,18 +19,18 @@ export class CoursesService {
   }
 
   async findCourseById(courseId: number): Promise<Course> {
-    return this.fetchJson<Course>(`/api/courses/${courseId}`);
+    return this.fetchRequest<Course>(`/api/courses/${courseId}`);
   }
 
   async findAllCourses(): Promise<Course[]> {
-    const res = await this.fetchJson<{ payload: Course[] }>('/api/courses');
+    const res = await this.fetchRequest<{ payload: Course[] }>('/api/courses');
     const courses = res.payload;
     this.courses.set(courses);
     return courses;
   }
 
   async saveCourse(courseId: number, changes: Partial<Course>): Promise<Course> {
-    const updatedCourse = await this.fetchJson<Course>(`/api/courses/${courseId}`, {
+    const updatedCourse = await this.fetchRequest<Course>(`/api/courses/${courseId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(changes)
@@ -58,7 +58,7 @@ export class CoursesService {
       pageSize: pageSize.toString()
     });
 
-    const res = await this.fetchJson<{ payload: Lesson[] }>(`/api/lessons?${query}`);
+    const res = await this.fetchRequest<{ payload: Lesson[] }>(`/api/lessons?${query}`);
     return res.payload;
   }
 }
