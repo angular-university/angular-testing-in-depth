@@ -52,24 +52,27 @@ export class CourseView implements OnInit {
     this.course.set(this.route.snapshot.data["course"]);
   }
 
-  loadLessonsPage() {
+ async loadLessonsPage() {
     const currentCourse = this.course();
     if (!currentCourse) return;
 
     this.loading.set(true);
-    this.coursesService.findLessons(
-      currentCourse.id,
-      this.searchQuery(),
-      this.sortDirection(),
-      this.pageIndex(),
-      this.pageSize()
-    ).subscribe({
-      next: (lessons) => {
-        this.lessons.set(lessons);
-        this.loading.set(false);
-      },
-      error: () => this.loading.set(false)
-    });
+    try {
+      // Using await since findLessons now returns a Promise
+      const lessons = await this.coursesService.findLessons(
+        currentCourse.id,
+        this.searchQuery(),
+        this.sortDirection(),
+        this.pageIndex(),
+        this.pageSize()
+      );
+      
+      this.lessons.set(lessons);
+    } catch (error) {
+      console.error("Failed to load lessons", error);
+    } finally {
+      this.loading.set(false);
+    }
   }
 
 

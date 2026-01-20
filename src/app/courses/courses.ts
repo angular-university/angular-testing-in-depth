@@ -27,7 +27,7 @@ export class Courses implements OnInit{
     this.reloadCourses();
   }
 
-  reloadCourses() {
-    this.courseService.findAllCourses().subscribe();
+  async reloadCourses() {
+    await this.courseService.findAllCourses();
   }
 }

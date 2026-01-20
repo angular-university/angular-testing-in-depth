@@ -35,7 +35,7 @@ export class CoursesDialog implements OnInit {
     this.dialogRef.close();
   }
 
-  save() {
+  async save() {
     if (this.form.invalid) {
       return;
     }
@@ -49,10 +49,11 @@ export class CoursesDialog implements OnInit {
       }
     };
 
-    this.coursesService.saveCourse(this.course.id, changes)
-      .pipe(
-        tap(() => this.dialogRef.close(this.form.value))
-      )
-      .subscribe();
+    try {
+      await this.coursesService.saveCourse(this.course.id, changes);
+      this.dialogRef.close(this.form.value);
+    } catch (err) {
+      console.error("Save failed", err);
+    }
   }
 }
