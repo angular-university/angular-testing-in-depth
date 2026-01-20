@@ -2,9 +2,11 @@ import { Component, signal, computed, inject, OnInit } from '@angular/core';
 import { CoursesCardList } from '../courses-card-list/courses-card-list';
 import { CoursesService } from '../services/courses';
 import { TabsComponent } from '../tabs/tabs';
+import { TabData } from '../tabs/tabs.model';
+import { CourseCategory } from '../model/course';
 
 @Component({
-  selector: 'app-courses',
+  selector: 'courses',
   standalone: true,
   imports: [CoursesCardList, TabsComponent],
   templateUrl: './courses.html',
@@ -14,9 +16,9 @@ export class Courses implements OnInit {
   private courseService = inject(CoursesService);
 
   allCourses = this.courseService.allCourses;
-  activeTab = signal<'beginner' | 'advanced'>('beginner');
+  activeTab = signal<CourseCategory>('beginner');
 
-  courseTabs = [
+  courseTabs:TabData[] = [
     { label: 'Beginner', value: 'beginner' },
     { label: 'Advanced', value: 'advanced' }
   ];
@@ -37,7 +39,7 @@ export class Courses implements OnInit {
     await this.courseService.findAllCourses();
   }
 
-  onTabChanged(newTab: 'beginner' | 'advanced') {
+  onTabChanged(newTab: CourseCategory) {
     this.activeTab.set(newTab);
   }
 }

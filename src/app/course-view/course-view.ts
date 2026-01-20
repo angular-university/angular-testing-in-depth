@@ -8,7 +8,7 @@ import { HighlightDirective } from '../directives/appHighlight.directive';
 import { DurationFormatPipe } from '../pipes/durationFormat.pipe';
 
 @Component({
-  selector: 'app-course-view',
+  selector: 'course-view',
   imports: [DurationFormatPipe, HighlightDirective],
   templateUrl: './course-view.html',
   styleUrl: './course-view.scss',

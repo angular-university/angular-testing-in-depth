@@ -5,7 +5,7 @@ import { CoursesDialog } from '../courses-dialog/courses-dialog';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-courses-card-list',
+  selector: 'courses-card-list',
   standalone: true,
   templateUrl: './courses-card-list.html',
   styleUrl: './courses-card-list.scss',

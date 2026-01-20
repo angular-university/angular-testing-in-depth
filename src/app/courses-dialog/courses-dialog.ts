@@ -5,7 +5,7 @@ import { CoursesService } from '../services/courses';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 
 @Component({
-  selector: 'app-courses-dialog',
+  selector: 'courses-dialog',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './courses-dialog.html',

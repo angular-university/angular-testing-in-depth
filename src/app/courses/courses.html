@@ -7,7 +7,7 @@
   <main class="tab-content">
     @if (activeTab() === 'beginner') {
       @if (beginnerCourses().length > 0) {
-        <app-courses-card-list
+        <courses-card-list
           (courseEdited)="reloadCourses()"
           [courses]="beginnerCourses()"/>
       } @else {
@@ -17,7 +17,7 @@
 
     @if (activeTab() === 'advanced') {
       @if (advancedCourses().length > 0) {
-        <app-courses-card-list
+        <courses-card-list
           (courseEdited)="reloadCourses()"
           [courses]="advancedCourses()"/>
       } @else {

@@ -11,3 +11,5 @@ export interface Course {
   category:string;
   lessonsCount:number;
 }
+
+export type CourseCategory = 'beginner' | 'advanced';

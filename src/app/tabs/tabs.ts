@@ -1,4 +1,6 @@
 import { Component, input, output, model } from '@angular/core';
+import { TabData } from './tabs.model';
+import { CourseCategory } from '../model/course';
 @Component({
   selector: 'tabs',
   imports: [],
@@ -6,11 +8,11 @@ import { Component, input, output, model } from '@angular/core';
   styleUrl: './tabs.scss',
 })
 export class TabsComponent {
-  tabs = input.required<{label: string, value: any}[]>();
+  tabs = input.required<TabData[]>();
 
-  value = model.required<any>();
+  value = model.required<string>();
 
-  tabChanged = output<any>();
+  tabChanged = output<CourseCategory>();
 
   selectTab(val: any) {
     this.value.set(val);

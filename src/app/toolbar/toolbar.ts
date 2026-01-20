@@ -2,7 +2,7 @@ import { Component,signal,output } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 'app-toolbar',
+  selector: 'toolbar',
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './toolbar.html',
   styleUrl: './toolbar.scss',
