@@ -1,18 +1,8 @@
 <div class="container">
-  <nav class="tab-nav">
-    <button 
-      class="tab-link" 
-      [class.active]="activeTab() === 'beginner'"
-      (click)="activeTab.set('beginner')">
-      Beginner
-    </button>
-    <button 
-      class="tab-link" 
-      [class.active]="activeTab() === 'advanced'"
-      (click)="activeTab.set('advanced')">
-      Advanced
-    </button>
-  </nav>
+<app-tabs 
+    [tabs]="courseTabs"
+    [(value)]="activeTab"
+    (tabChanged)="onTabChanged($event)" />
 
   <main class="tab-content">
     @if (activeTab() === 'beginner') {
