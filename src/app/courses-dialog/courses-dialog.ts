@@ -1,60 +1,57 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { Course } from '../model/course';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, signal } from '@angular/core';
+import { Course, CourseData } from '../model/course';
 import { CoursesService } from '../services/courses';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
+import { form, required, submit,Field} from '@angular/forms/signals';
 
 @Component({
   selector: 'courses-dialog',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [Field],
   templateUrl: './courses-dialog.html',
   styleUrl: './courses-dialog.scss',
 })
-export class CoursesDialog implements OnInit {
-  private fb = inject(FormBuilder);
+export class CoursesDialog {
   private coursesService = inject(CoursesService);
-  
   private dialogRef = inject(DialogRef<Course>); 
   public data = inject<{ course: Course }>(DIALOG_DATA);
 
-  course: Course;
-  form!: FormGroup;
+  courseModel = signal<CourseData>({
+    description: this.data.course.titles.description ?? '',
+    category: this.data.course.category ?? '',
+    releasedAt: new Date().toISOString().split('T')[0], 
+    longDescription: this.data.course.titles.longDescription ?? ''
+  });
 
-  constructor() {
-    this.course = this.data.course;
-  }
-
-  ngOnInit() {
-    this.form = this.fb.group({
-      description: [this.course.titles.description, Validators.required],
-      category: [this.course.category, Validators.required],
-      releasedAt: [new Date(), Validators.required],
-      longDescription: [this.course.titles.longDescription, Validators.required]
-    });
-  }
+  courseForm = form(this.courseModel, (f) => {
+    required(f.description);
+    required(f.category);
+    required(f.releasedAt);
+    required(f.longDescription);
+  });
 
   close() {
     this.dialogRef.close();
   }
 
   async save() {
-    if (this.form.invalid) return;
+    await submit(this.courseForm, async (f) => {
+      const val = f().value();
+      
+      const changes: Partial<Course> = {
+        category: val.category as any, 
+        titles: {
+          description: val.description,
+          longDescription: val.longDescription
+        }
+      };
 
-    const val = this.form.value;
-    const changes: Partial<Course> = {
-      category: val.category, 
-      titles: {
-        description: val.description,
-        longDescription: val.longDescription
+      try {
+        await this.coursesService.saveCourse(this.data.course.id, changes);
+        this.dialogRef.close(val as any);
+      } catch (err) {
+        console.error("Save failed", err);
       }
-    };
-
-    try {
-      await this.coursesService.saveCourse(this.course.id, changes);
-      this.dialogRef.close(val);
-    } catch (err) {
-      console.error("Save failed", err);
-    }
+    });
   }
 }

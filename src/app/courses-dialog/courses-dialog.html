@@ -1,43 +1,45 @@
-<div class="modal-backdrop">
-    <div class="modal-content">
-        <header class="modal-header">
-            <div class="modal-title">{{ course.titles.description }}</div>
-            <div>
-                <button class="close-button" (click)="close()">
-                    <img src="/icons/close.svg" alt="Close Icon">
-                </button>
-            </div>
-        </header>
-
-        <section class="modal-body" [formGroup]="form">
-            <div class="form-field">
-                <input type="text" placeholder="Course Description" formControlName="description">
-            </div>
-
-            <div class="form-field">
-                <select formControlName="category">
-                    <option value="BEGINNER">Beginner</option>
-                    <option value="INTERMEDIATE">Intermediate</option>
-                    <option value="ADVANCED">Advanced</option>
-                </select>
-            </div>
-
-            <div class="form-field">
-                <input type="date" formControlName="releasedAt">
-            </div>
-
-            <div class="form-field">
-                <textarea placeholder="Long Description" formControlName="longDescription"></textarea>
-            </div>
-        </section>
-
-        <footer class="modal-actions">
-            <button class="btn-secondary" (click)="close()">
+<div class="modal-content">
+    <header class="modal-header">
+        <div class="modal-title">{{ courseModel().description }}</div>
+        <div>
+            <button class="close-button" (click)="close()">
                 <img src="/icons/close.svg" alt="Close Icon">
-                Close</button>
-            <button class="btn-primary" (click)="save()" [disabled]="!form.valid">
-                <img src="/icons/save.svg" alt="Save Icon">
-                Save</button>
-        </footer>
-    </div>
+            </button>
+        </div>
+    </header>
+
+    <section class="modal-body">
+        <div class="form-field">
+            <input type="text" placeholder="Course Description" [field]="courseForm.description">
+        </div>
+
+        <div class="form-field">
+            <select [field]="courseForm.category">
+                <option value="BEGINNER">Beginner</option>
+                <option value="INTERMEDIATE">Intermediate</option>
+                <option value="ADVANCED">Advanced</option>
+            </select>
+        </div>
+
+        <div class="form-field">
+            <input type="date" [field]="courseForm.releasedAt">
+        </div>
+
+        <div class="form-field">
+            <textarea placeholder="Long Description" [field]="courseForm.longDescription"></textarea>
+        </div>
+    </section>
+
+    <footer class="modal-actions">
+        <button class="btn-secondary" (click)="close()" [disabled]="courseForm().submitting()">
+            <img src="/icons/close.svg" alt="Close Icon">
+            Close
+        </button>
+        
+        <button class="btn-primary" (click)="save()" 
+                [disabled]="!courseForm().valid() || courseForm().submitting()">
+            <img src="/icons/save.svg" alt="Save Icon">
+            {{ courseForm().submitting() ? 'Saving...' : 'Save' }}
+        </button>
+    </footer>
 </div>
