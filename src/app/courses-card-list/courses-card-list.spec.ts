@@ -3,80 +3,80 @@ import { CoursesCardList } from './courses-card-list';
 import { Course } from '../model/course';
 import { provideRouter } from '@angular/router';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { ComponentHarness, HarnessLoader} from '@angular/cdk/testing';
-import { DialogModule } from '@angular/cdk/dialog';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { Dialog, DialogModule, DialogRef } from '@angular/cdk/dialog';
 import { By } from '@angular/platform-browser';
 import { describe, expect, it, beforeEach, vi } from 'vitest';
 
 describe('CoursesCardList', () => {
-  let component: CoursesCardList;
-  let fixture: ComponentFixture<CoursesCardList>;
-  let loader: HarnessLoader;      
-  let rootLoader: HarnessLoader;   
+    let component: CoursesCardList;
+    let fixture: ComponentFixture<CoursesCardList>;
+    let loader: HarnessLoader;
+    let rootLoader: HarnessLoader;
 
 
-  const mockCourses: Course[] = [
-    { 
-      id: 1, 
-      titles: { description: 'Angular Testing', longDescription: 'Theory' }, 
-      iconUrl: 'test.png' 
-    } as Course
-  ];
+    const mockCourses: Course[] = [
+        {
+            id: 1,
+            titles: { description: 'Angular Testing', longDescription: 'Theory' },
+            iconUrl: 'test.png'
+        } as Course
+    ];
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [CoursesCardList, DialogModule],
-      providers: [provideRouter([])]
-    }).compileComponents();
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [CoursesCardList, DialogModule],
+            providers: [provideRouter([])]
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(CoursesCardList);
-    component = fixture.componentInstance;
-    
-    fixture.componentRef.setInput('courses', mockCourses);
-    fixture.detectChanges();
+        fixture = TestBed.createComponent(CoursesCardList);
+        component = fixture.componentInstance;
 
-    loader = TestbedHarnessEnvironment.loader(fixture);
-    rootLoader = TestbedHarnessEnvironment.documentRootLoader(fixture);
-  });
+        fixture.componentRef.setInput('courses', mockCourses);
+        fixture.detectChanges();
 
-  it('should display the course list', () => {
-    const cards = fixture.debugElement.queryAll(By.css('.course-card'));
-    expect(cards.length).toBe(1);
-    expect(cards[0].nativeElement.textContent).toContain('Angular Testing');
-  });
+        loader = TestbedHarnessEnvironment.loader(fixture);
+        rootLoader = TestbedHarnessEnvironment.documentRootLoader(fixture);
+    });
 
-  it('should open the edit dialog when clicking the edit button', async () => {
-    const editBtn = fixture.debugElement.query(By.css('button.btn:last-child'));
-    editBtn.nativeElement.click();
+    it('should display the course list', () => {
+        const cards = fixture.debugElement.queryAll(By.css('.course-card'));
+        expect(cards.length).toBe(1);
+        expect(cards[0].nativeElement.textContent).toContain('Angular Testing');
+    });
 
-    const dialog = await rootLoader.getHarness(CdkDialogHarness);
-    
-    expect(dialog).toBeTruthy();
-    
-    const host = await dialog.host();
-    expect(await host.text()).toContain('Angular Testing');
-  });
+    it('should open the edit dialog when clicking the edit button', async () => {
+        const editBtn = fixture.debugElement.query(By.css('button.btn:last-child'));
+        editBtn.nativeElement.click();
 
-  it('should emit courseEdited when dialog is closed with a result', async () => {
-    const emitSpy = vi.spyOn(component.courseEdited, 'emit');
+        fixture.detectChanges();
+        await fixture.whenStable();
 
-    component.editCourse(mockCourses[0]);
+        const dialogContainer = document.querySelector('.cdk-dialog-container');
 
-    const dialog = await rootLoader.getHarness(CdkDialogHarness);
-    
-    await dialog.close(); 
+        expect(dialogContainer, 'Dialog container should exist in the DOM').toBeTruthy();
 
-    expect(emitSpy).toBeDefined();
-  });
+        expect(dialogContainer?.textContent).toContain('Angular Testing');
+    });
+
+    it('should emit courseEdited when dialog is closed with a result', async () => {
+        const emitSpy = vi.spyOn(component.courseEdited, 'emit');
+
+        const dialogService = TestBed.inject(Dialog);
+
+        const mockDialogRef = {
+            closed: {
+                subscribe: (callback: (val: any) => void) => {
+                    callback(true);
+                    return { unsubscribe: () => { } };
+                }
+            }
+        } as DialogRef<any, any>;
+
+        vi.spyOn(dialogService, 'open').mockReturnValue(mockDialogRef);
+
+        component.editCourse(mockCourses[0]);
+
+        expect(emitSpy).toHaveBeenCalled();
+    });
 });
-
-class CdkDialogHarness extends ComponentHarness {
-  static hostSelector = '.cdk-dialog-container';
-
-  private _closeButton = this.locatorFor('button.close-button');
-
-  async close() {
-    const button = await this._closeButton();
-    await button.click();
-  }
-}
