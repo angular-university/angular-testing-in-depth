@@ -10,12 +10,12 @@ import { CourseCategory } from '../model/course';
 export class TabsComponent {
   tabs = input.required<TabData[]>();
 
-  value = model<string>();
+  activeTab = model<string>();
 
   tabChanged = output<CourseCategory>();
 
   selectTab(val: any) {
-    this.value.set(val);
+    this.activeTab.set(val);
     this.tabChanged.emit(val);
   }
 }

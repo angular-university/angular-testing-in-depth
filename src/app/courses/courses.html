@@ -1,7 +1,7 @@
 <div class="container">
 <tabs
     [tabs]="courseTabs"
-    [(value)]="activeTab"
+    [(activeTab)]="activeTab"
     (tabChanged)="onTabChanged($event)" />
 
   <main class="tab-content">
