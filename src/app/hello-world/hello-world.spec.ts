@@ -19,7 +19,8 @@ describe('HelloWorld', () => {
     component = fixture.componentInstance;
     de = fixture.debugElement;
     el = de.nativeElement;
-    await fixture.whenStable();
+    fixture.detectChanges();
+    // await fixture.whenStable();
   });
 
   it('should create', () => {
