@@ -6,6 +6,7 @@ import { CoursesService } from '../services/courses.service';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { HighlightDirective } from '../directives/appHighlight.directive';
 import { DurationFormatPipe } from '../pipes/durationFormat.pipe';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'course-view',
@@ -25,23 +26,27 @@ export class CourseView implements OnInit {
   pageIndex = signal(0);
   pageSize = signal(3);
   sortDirection = signal<'asc' | 'desc'>('asc');
-  sortField = signal('seqNo'); 
-  searchQuery = signal('');
-  private searchSubject = new Subject<string>();
+  sortField = signal('seqNo');
+  searchInput = signal('');
+
+  searchQuery = toSignal(
+    toObservable(this.searchInput).pipe(
+      debounceTime(400),
+      distinctUntilChanged()
+    ),
+    { initialValue: '' }
+  );
 
   currentPage = computed(() => this.pageIndex() + 1);
   totalPages = computed(() => Math.ceil((this.course()?.lessonsCount || 0) / this.pageSize()));
   isFirstPage = computed(() => this.pageIndex() === 0);
   isLastPage = computed(() => this.currentPage() >= this.totalPages());
 
-  constructor() {
-    this.searchSubject.pipe(
-      debounceTime(400),
-      distinctUntilChanged()
-    ).subscribe(query => {
+ constructor() {
+    effect(() => {
+      this.searchQuery(); 
       this.pageIndex.set(0);
-      this.searchQuery.set(query);
-    });
+    }, { allowSignalWrites: true });
 
     effect(() => {
       this.loadLessonsPage();
@@ -52,21 +57,19 @@ export class CourseView implements OnInit {
     this.course.set(this.route.snapshot.data["course"]);
   }
 
- async loadLessonsPage() {
+  async loadLessonsPage() {
     const currentCourse = this.course();
     if (!currentCourse) return;
 
     this.loading.set(true);
     try {
-      // Using await since findLessons now returns a Promise
       const lessons = await this.coursesService.findLessons(
         currentCourse.id,
-        this.searchQuery(),
+        this.searchQuery(), 
         this.sortDirection(),
         this.pageIndex(),
         this.pageSize()
       );
-      
       this.lessons.set(lessons);
     } catch (error) {
       console.error("Failed to load lessons", error);
@@ -75,9 +78,8 @@ export class CourseView implements OnInit {
     }
   }
 
-
   onSearch(query: string) {
-    this.searchSubject.next(query);
+    this.searchInput.set(query);
   }
 
   onPageSizeChange(event: Event) {
