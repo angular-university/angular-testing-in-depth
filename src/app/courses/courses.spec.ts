@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Courses } from './courses';
-import { CoursesService } from '../services/courses';
+import { CoursesService } from '../services/courses.service';
 import { signal } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Course } from '../model/course';

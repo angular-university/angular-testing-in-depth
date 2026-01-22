@@ -2,7 +2,7 @@ import { Component, computed, effect, inject, OnInit, signal } from '@angular/co
 import { Course } from '../model/course';
 import { Lesson } from '../model/leson';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CoursesService } from '../services/courses';
+import { CoursesService } from '../services/courses.service';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { HighlightDirective } from '../directives/appHighlight.directive';
 import { DurationFormatPipe } from '../pipes/durationFormat.pipe';

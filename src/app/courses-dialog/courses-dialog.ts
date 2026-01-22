@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { Course, CourseData } from '../model/course';
-import { CoursesService } from '../services/courses';
+import { CoursesService } from '../services/courses.service';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { form, required, submit,Field} from '@angular/forms/signals';
 

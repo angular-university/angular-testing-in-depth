@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
-import { CoursesService } from './courses';
+import { CoursesService } from './courses.service';
 import { Course } from '../model/course';
 import { describe, beforeEach, it, expect, afterEach } from 'vitest';
 

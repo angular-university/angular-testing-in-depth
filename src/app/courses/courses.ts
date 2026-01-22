@@ -1,6 +1,6 @@
 import { Component, signal, computed, inject, OnInit } from '@angular/core';
 import { CoursesCardList } from '../courses-card-list/courses-card-list';
-import { CoursesService } from '../services/courses';
+import { CoursesService } from '../services/courses.service';
 import { TabsComponent } from '../tabs/tabs';
 import { TabData } from '../tabs/tabs.model';
 import { CourseCategory } from '../model/course';
