@@ -4,9 +4,10 @@ import { Course } from '../model/course';
 import { provideRouter } from '@angular/router';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { HarnessLoader } from '@angular/cdk/testing';
-import { Dialog, DialogModule, DialogRef } from '@angular/cdk/dialog';
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { By } from '@angular/platform-browser';
 import { describe, expect, it, beforeEach, vi } from 'vitest';
+import { CoursesDialog } from '../courses-dialog/courses-dialog';
 
 describe('CoursesCardList', () => {
     let component: CoursesCardList;
@@ -25,7 +26,7 @@ describe('CoursesCardList', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [CoursesCardList, DialogModule],
+            imports: [CoursesCardList, CoursesDialog],
             providers: [provideRouter([])]
         }).compileComponents();
 
@@ -52,31 +53,24 @@ describe('CoursesCardList', () => {
         fixture.detectChanges();
         await fixture.whenStable();
 
-        const dialogContainer = document.querySelector('.cdk-dialog-container');
+        const dialogForm = document.querySelector('.course-form');
+        expect(dialogForm, 'The Course Dialog form should be visible in the DOM').toBeTruthy();
 
-        expect(dialogContainer, 'Dialog container should exist in the DOM').toBeTruthy();
-
-        expect(dialogContainer?.textContent).toContain('Angular Testing');
+        const titleInput = dialogForm?.querySelector('input') as HTMLInputElement;
+        expect(titleInput?.value).toBe('Angular Testing');
     });
 
     it('should emit courseEdited when dialog is closed with a result', async () => {
         const emitSpy = vi.spyOn(component.courseEdited, 'emit');
 
-        const dialogService = TestBed.inject(Dialog);
-
-        const mockDialogRef = {
-            closed: {
-                subscribe: (callback: (val: any) => void) => {
-                    callback(true);
-                    return { unsubscribe: () => { } };
-                }
-            }
-        } as DialogRef<any, any>;
-
-        vi.spyOn(dialogService, 'open').mockReturnValue(mockDialogRef);
-
         component.editCourse(mockCourses[0]);
 
+        const dialogService = TestBed.inject(Dialog);
+        const openDialog = dialogService.openDialogs[0];
+
+        openDialog.close(true);
+
         expect(emitSpy).toHaveBeenCalled();
+
     });
 });
