@@ -1,32 +1,37 @@
-import { Injectable, signal } from "@angular/core";
+import { Injectable, signal, inject } from "@angular/core";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { firstValueFrom } from "rxjs";
 import { Course } from "../model/course";
 import { Lesson } from "../model/leson";
-import { fetchRequest } from "../common/http-utils";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
+  private http = inject(HttpClient);
+  
   private courses = signal<Course[]>([]);
   readonly allCourses = this.courses.asReadonly();
 
   async findCourseById(courseId: number): Promise<Course> {
-    return fetchRequest<Course>(`/api/courses/${courseId}`);
+    return firstValueFrom(
+      this.http.get<Course>(`/api/courses/${courseId}`)
+    );
   }
 
   async findAllCourses(): Promise<Course[]> {
-    const res = await fetchRequest<{ payload: Course[] }>('/api/courses');
+    const res = await firstValueFrom(
+      this.http.get<{ payload: Course[] }>('/api/courses')
+    );
     const courses = res.payload;
     this.courses.set(courses);
     return courses;
   }
 
   async saveCourse(courseId: number, changes: Partial<Course>): Promise<Course> {
-    const updatedCourse = await fetchRequest<Course>(`/api/courses/${courseId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(changes)
-    });
+    const updatedCourse = await firstValueFrom(
+      this.http.put<Course>(`/api/courses/${courseId}`, changes)
+    );
 
     this.courses.update(courses =>
       courses.map(course => course.id === courseId ? { ...course, ...updatedCourse } : course)
@@ -42,15 +47,16 @@ export class CoursesService {
     pageNumber = 0,
     pageSize = 3
   ): Promise<Lesson[]> {
-    const query = new URLSearchParams({
-      courseId: courseId.toString(),
-      filter,
-      sortOrder,
-      pageNumber: pageNumber.toString(),
-      pageSize: pageSize.toString()
-    });
+    const params = new HttpParams()
+      .set('courseId', courseId.toString())
+      .set('filter', filter)
+      .set('sortOrder', sortOrder)
+      .set('pageNumber', pageNumber.toString())
+      .set('pageSize', pageSize.toString());
 
-    const res = await fetchRequest<{ payload: Lesson[] }>(`/api/lessons?${query}`);
+    const res = await firstValueFrom(
+      this.http.get<{ payload: Lesson[] }>(`/api/lessons`, { params })
+    );
     return res.payload;
   }
 }
