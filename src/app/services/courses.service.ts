@@ -2,7 +2,7 @@ import { Injectable, signal, inject } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { firstValueFrom } from "rxjs";
 import { Course } from "../model/course";
-import { Lesson } from "../model/leson";
+import { Lesson } from "../model/lesson";
 
 @Injectable({
   providedIn: 'root'

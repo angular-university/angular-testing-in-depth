@@ -3,8 +3,8 @@ import { Course } from '../model/course';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../services/courses.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { HighlightDirective } from '../directives/appHighlight.directive';
-import { DurationFormatPipe } from '../pipes/durationFormat.pipe';
+import { HighlightDirective } from '../directives/highlight.directive';
+import { DurationFormatPipe } from '../pipes/duration-format.pipe';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 
 @Component({

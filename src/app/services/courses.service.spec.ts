@@ -4,24 +4,13 @@ import { provideHttpClientTesting, HttpTestingController } from '@angular/common
 import { CoursesService } from './courses.service';
 import { Course } from '../model/course';
 import { describe, beforeEach, it, expect, afterEach } from 'vitest';
+import { createCourse, MOCK_COURSES } from '../testing/test-data';
 
 describe('CoursesService', () => {
   let service: CoursesService;
   let httpTestingController: HttpTestingController;
 
-  const mockCourse: Course = {
-    id: 12,
-    seqNo: 1,
-    titles: {
-      description: 'Angular Testing',
-      longDescription: 'A deep dive into testing'
-    },
-    iconUrl: '',
-    uploadedImageUrl: '',
-    courseListIcon: '',
-    category: 'BEGINNER',
-    lessonsCount: 10
-  };
+  const mockCourse: Course = MOCK_COURSES[0];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -47,22 +36,22 @@ describe('CoursesService', () => {
     req.flush(mockCourse);
 
     const course = await coursePromise;
-    expect(course.titles.description).toBe('Angular Testing');
+    expect(course.titles.description).toBe('Beginner Course');
   });
 
   it('should save and update the signal with nested titles', async () => {
+    const initialCourse = createCourse({ id: 12, titles: { description: 'Old Title' } });
     const changes: Partial<Course> = {
       titles: { description: 'New Title' }
     };
-    const updatedCourse = { ...mockCourse, ...changes };
-
-    (service as any).courses.set([mockCourse]);
+    const updatedCourse = { ...initialCourse, ...changes };
+    (service as any).courses.set([initialCourse]);
 
     const savePromise = service.saveCourse(12, changes);
-
     const req = httpTestingController.expectOne('/api/courses/12');
     req.flush(updatedCourse);
     await savePromise;
+
     const allCourses = service.allCourses();
     expect(allCourses[0].titles.description).toBe('New Title');
   });

@@ -8,6 +8,7 @@ import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { By } from '@angular/platform-browser';
 import { describe, expect, it, beforeEach, vi } from 'vitest';
 import { CoursesDialog } from '../courses-dialog/courses-dialog';
+import { MOCK_COURSES } from '../testing/test-data';
 
 describe('CoursesCardList', () => {
     let component: CoursesCardList;
@@ -16,13 +17,7 @@ describe('CoursesCardList', () => {
     let rootLoader: HarnessLoader;
 
 
-    const mockCourses: Course[] = [
-        {
-            id: 1,
-            titles: { description: 'Angular Testing', longDescription: 'Theory' },
-            iconUrl: 'test.png'
-        } as Course
-    ];
+    const mockCourses: Course[] = MOCK_COURSES
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -42,8 +37,8 @@ describe('CoursesCardList', () => {
 
     it('should display the course list', () => {
         const cards = fixture.debugElement.queryAll(By.css('.course-card'));
-        expect(cards.length).toBe(1);
-        expect(cards[0].nativeElement.textContent).toContain('Angular Testing');
+        expect(cards.length).toBe(2);
+        expect(cards[0].nativeElement.textContent).toContain('Beginner Course');
     });
 
     it('should open the edit dialog when clicking the edit button', async () => {
@@ -57,7 +52,7 @@ describe('CoursesCardList', () => {
         expect(dialogForm, 'The Course Dialog form should be visible in the DOM').toBeTruthy();
 
         const titleInput = dialogForm?.querySelector('input') as HTMLInputElement;
-        expect(titleInput?.value).toBe('Angular Testing');
+        expect(titleInput?.value).toBe('Beginner Course');
     });
 
     it('should emit courseEdited when dialog is closed with a result', async () => {

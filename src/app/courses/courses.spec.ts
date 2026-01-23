@@ -8,6 +8,7 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
 import { ApplicationRef } from '@angular/core';
+import { MOCK_COURSES } from '../testing/test-data';
 
 describe('Courses Component Integration', () => {
   let component: Courses;
@@ -15,10 +16,7 @@ describe('Courses Component Integration', () => {
   let httpMock: HttpTestingController;
   let appRef: ApplicationRef;
 
-  const mockCourses: Course[] = [
-    { id: 1, category: 'BEGINNER', titles: { description: 'Beginner Course' } } as Course,
-    { id: 2, category: 'ADVANCED', titles: { description: 'Advanced Course' } } as Course
-  ];
+  const mockCourses: Course[] = MOCK_COURSES
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

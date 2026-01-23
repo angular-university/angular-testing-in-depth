@@ -3,15 +3,13 @@ import {TabsComponent} from './tabs';
 import {TabData} from './tabs.model';
 import {By} from '@angular/platform-browser';
 import {beforeEach, describe, expect, it, vi} from 'vitest';
+import { MOCK_TABS} from '../testing/test-data';
 
 describe('TabsComponent', () => {
   let component: TabsComponent;
   let fixture: ComponentFixture<TabsComponent>;
 
-  const mockTabs: TabData[] = [
-    {label: 'Beginner', value: 'beginner'},
-    {label: 'Advanced', value: 'advanced'}
-  ];
+  const mockTabs: TabData[] = MOCK_TABS;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
