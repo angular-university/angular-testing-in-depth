@@ -10,11 +10,11 @@
 
     <section class="modal-body">
         <div class="form-field">
-            <input type="text" placeholder="Course Description" [field]="courseForm.description">
+            <input type="text" placeholder="Course Description" [formField]="courseForm.description">
         </div>
 
         <div class="form-field">
-            <select [field]="courseForm.category">
+            <select [formField]="courseForm.category">
                 <option value="BEGINNER">Beginner</option>
                 <option value="INTERMEDIATE">Intermediate</option>
                 <option value="ADVANCED">Advanced</option>
@@ -22,11 +22,11 @@
         </div>
 
         <div class="form-field">
-            <input type="date" [field]="courseForm.releasedAt">
+            <input type="date" [formField]="courseForm.releasedAt">
         </div>
 
         <div class="form-field">
-            <textarea placeholder="Long Description" [field]="courseForm.longDescription"></textarea>
+            <textarea placeholder="Long Description" [formField]="courseForm.longDescription"></textarea>
         </div>
     </section>
 
