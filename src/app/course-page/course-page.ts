@@ -8,12 +8,12 @@ import { DurationFormatPipe } from '../pipes/durationFormat.pipe';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'course-view',
+  selector: 'course-page',
   imports: [DurationFormatPipe, HighlightDirective],
-  templateUrl: './course-view.html',
-  styleUrl: './course-view.scss',
+  templateUrl: './course-page.html',
+  styleUrl: './course-page.scss',
 })
-export class CourseView implements OnInit {
+export class CoursePage implements OnInit {
   private route = inject(ActivatedRoute);
   private coursesService = inject(CoursesService);
   private router = inject(Router);
@@ -33,16 +33,31 @@ export class CourseView implements OnInit {
     { initialValue: '' }
   );
 
-lessonsResource = this.coursesService.getLessonsResource(
-    () => this.course()?.id,
-    () => this.searchQuery(),
-    () => this.sortDirection(),
-    () => this.pageIndex(),
-    () => this.pageSize()
-  );
+  lessonsResource = resource({
+    params: () => {
+      const courseId = this.course()?.id;
+      if (!courseId) return undefined;
 
-  // The component still consumes the data as signals
-  lessons = computed(() => this.lessonsResource.value()?.payload ?? []);
+      return {
+        courseId,
+        filter: this.searchQuery(),
+        sortOrder: this.sortDirection(),
+        pageNumber: this.pageIndex(),
+        pageSize: this.pageSize()
+      };
+    },
+    loader: async ({ params }) => {
+      return this.coursesService.findLessons(
+        params.courseId,
+        params.filter,
+        params.sortOrder,
+        params.pageNumber,
+        params.pageSize
+      );
+    }
+  });
+
+  lessons = computed(() => this.lessonsResource.value() ?? []);
   loading = computed(() => this.lessonsResource.isLoading());
   currentPage = computed(() => this.pageIndex() + 1);
   totalPages = computed(() => Math.ceil((this.course()?.lessonsCount || 0) / this.pageSize()));

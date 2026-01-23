@@ -15,7 +15,8 @@ import { CourseCategory } from '../model/course';
 export class Courses implements OnInit {
   private courseService = inject(CoursesService);
 
-  allCourses = computed(() => this.courseService.allCourses()?.payload ?? []); activeTab = signal<CourseCategory>('beginner');
+  allCourses = this.courseService.allCourses;
+  activeTab = signal<CourseCategory>('beginner');
 
   courseTabs: TabData[] = [
     { label: 'Beginner', value: 'beginner' },
@@ -35,7 +36,7 @@ export class Courses implements OnInit {
   }
 
   async reloadCourses() {
-    this.courseService.coursesResource.reload();
+    this.courseService.findAllCourses();
   }
 
   onTabChanged(newTab: CourseCategory) {
