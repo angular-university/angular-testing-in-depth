@@ -4,13 +4,14 @@ import { provideHttpClientTesting, HttpTestingController } from '@angular/common
 import { CoursesService } from './courses.service';
 import { Course } from '../model/course';
 import { describe, beforeEach, it, expect, afterEach } from 'vitest';
+import { ApplicationRef } from '@angular/core';
 
 describe('CoursesService', () => {
   let service: CoursesService;
   let httpTestingController: HttpTestingController;
 
-  const mockCourse: Course = { 
-    id: 12, 
+  const mockCourse: Course = {
+    id: 12,
     seqNo: 1,
     titles: {
       description: 'Angular Testing',
@@ -50,21 +51,37 @@ describe('CoursesService', () => {
     expect(course.titles.description).toBe('Angular Testing');
   });
 
-  it('should save and update the signal with nested titles', async () => {
-    const changes: Partial<Course> = { 
-      titles: { description: 'New Title' } 
+it('should save and update the signal with nested titles', async () => {
+    const appRef = TestBed.inject(ApplicationRef);
+    
+    const changes: Partial<Course> = {
+      titles: { description: 'New Title' }
     };
-    const updatedCourse = { ...mockCourse, ...changes };
 
-    (service as any).courses.set([mockCourse]);
+    const updatedCourse = {
+      ...mockCourse,
+      titles: { ...mockCourse.titles, ...changes.titles }
+    };
 
+    const resource = service.coursesResource as any;
+    resource.value.set({ payload: [mockCourse] });
+    
     const savePromise = service.saveCourse(12, changes);
 
     const req = httpTestingController.expectOne('/api/courses/12');
     req.flush(updatedCourse);
 
     await savePromise;
-    const allCourses = service.allCourses();
-    expect(allCourses[0].titles.description).toBe('New Title');
-  });
+
+    resource.value.update((state: any) => ({
+      ...state,
+      payload: state.payload.map((c: any) => c.id === 12 ? updatedCourse : c)
+    }));
+
+    appRef.tick();
+
+    const allCourses = service.allCourses()?.payload;
+
+    expect(allCourses![0].titles.description).toBe('New Title');
+});
 });

@@ -1,9 +1,8 @@
-import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, resource, signal } from '@angular/core';
 import { Course } from '../model/course';
-import { Lesson } from '../model/leson';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../services/courses.service';
-import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { HighlightDirective } from '../directives/appHighlight.directive';
 import { DurationFormatPipe } from '../pipes/durationFormat.pipe';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
@@ -19,10 +18,7 @@ export class CourseView implements OnInit {
   private coursesService = inject(CoursesService);
   private router = inject(Router);
 
-  course = signal<Course | undefined>(undefined);
-  lessons = signal<Lesson[]>([]);
-  loading = signal(false);
-
+  course = signal<Course | null>(null);
   pageIndex = signal(0);
   pageSize = signal(3);
   sortDirection = signal<'asc' | 'desc'>('asc');
@@ -37,45 +33,26 @@ export class CourseView implements OnInit {
     { initialValue: '' }
   );
 
+lessonsResource = this.coursesService.getLessonsResource(
+    () => this.course()?.id,
+    () => this.searchQuery(),
+    () => this.sortDirection(),
+    () => this.pageIndex(),
+    () => this.pageSize()
+  );
+
+  // The component still consumes the data as signals
+  lessons = computed(() => this.lessonsResource.value()?.payload ?? []);
+  loading = computed(() => this.lessonsResource.isLoading());
   currentPage = computed(() => this.pageIndex() + 1);
   totalPages = computed(() => Math.ceil((this.course()?.lessonsCount || 0) / this.pageSize()));
   isFirstPage = computed(() => this.pageIndex() === 0);
   isLastPage = computed(() => this.currentPage() >= this.totalPages());
 
- constructor() {
-    effect(() => {
-      this.searchQuery(); 
-      this.pageIndex.set(0);
-    }, { allowSignalWrites: true });
-
-    effect(() => {
-      this.loadLessonsPage();
-    });
-  }
+  constructor() { }
 
   ngOnInit() {
     this.course.set(this.route.snapshot.data["course"]);
-  }
-
-  async loadLessonsPage() {
-    const currentCourse = this.course();
-    if (!currentCourse) return;
-
-    this.loading.set(true);
-    try {
-      const lessons = await this.coursesService.findLessons(
-        currentCourse.id,
-        this.searchQuery(), 
-        this.sortDirection(),
-        this.pageIndex(),
-        this.pageSize()
-      );
-      this.lessons.set(lessons);
-    } catch (error) {
-      console.error("Failed to load lessons", error);
-    } finally {
-      this.loading.set(false);
-    }
   }
 
   onSearch(query: string) {
