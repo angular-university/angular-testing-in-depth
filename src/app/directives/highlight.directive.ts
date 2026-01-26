@@ -5,8 +5,7 @@ import { Directive, ElementRef, HostListener, input } from '@angular/core';
   standalone: true
 })
 export class HighlightDirective {
-  // Signal-based input for the highlight color
-  highlightColor = input<string>('#f0f4ff');
+  highlightColor = input<string>('rgb(0, 128, 0)');
 
   constructor(private el: ElementRef) {}
 
