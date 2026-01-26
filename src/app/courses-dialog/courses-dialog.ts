@@ -23,11 +23,11 @@ export class CoursesDialog {
     longDescription: this.data.course.titles.longDescription ?? ''
   });
 
-  courseForm = form(this.courseModel, (f) => {
-    required(f.description);
-    required(f.category);
-    required(f.releasedAt);
-    required(f.longDescription);
+  courseForm = form(this.courseModel, (schemaPath) => {
+    required(schemaPath.description,{message: 'Description is required'});
+    required(schemaPath.category,{message: 'Category is required'});
+    required(schemaPath.releasedAt,{message: 'Release Date is required'});
+    required(schemaPath.longDescription,{message: 'Long Description is required'});
   });
 
   close() {

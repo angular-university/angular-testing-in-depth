@@ -24,9 +24,9 @@ export const MOCK_COURSES: Course[] = [
   createCourse({ id: 2, category: 'ADVANCED', titles: { description: 'Advanced Course', longDescription: 'Practice' } })
 ];
 
-export const MOCK_LESSONS: any[] = [
-  { id: 101, seqNo: 1, description: 'Lesson 1', duration: '5:00' },
-  { id: 102, seqNo: 2, description: 'Lesson 2', duration: '10:00' }
+export const MOCK_LESSONS: Lesson[] = [
+  { id: 101, seqNo: 1, description: 'Lesson 1', duration: '5:00', courseId:1 },
+  { id: 102, seqNo: 2, description: 'Lesson 2', duration: '10:00', courseId: 2 }
 ];
 
 export const MOCK_TABS: TabData[] = [
