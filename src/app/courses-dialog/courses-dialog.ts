@@ -1,13 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { Course, CourseData } from '../model/course';
-import { CoursesService } from '../services/courses';
+import { CoursesService } from '../services/courses.service';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
-import { form, required, submit,Field} from '@angular/forms/signals';
+import { form, required, submit,FormField} from '@angular/forms/signals';
 
 @Component({
   selector: 'courses-dialog',
   standalone: true,
-  imports: [Field],
+  imports: [FormField],
   templateUrl: './courses-dialog.html',
   styleUrl: './courses-dialog.scss',
 })
@@ -23,11 +23,11 @@ export class CoursesDialog {
     longDescription: this.data.course.titles.longDescription ?? ''
   });
 
-  courseForm = form(this.courseModel, (f) => {
-    required(f.description);
-    required(f.category);
-    required(f.releasedAt);
-    required(f.longDescription);
+  courseForm = form(this.courseModel, (schemaPath) => {
+    required(schemaPath.description,{message: 'Description is required'});
+    required(schemaPath.category,{message: 'Category is required'});
+    required(schemaPath.releasedAt,{message: 'Release Date is required'});
+    required(schemaPath.longDescription,{message: 'Long Description is required'});
   });
 
   close() {

@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { AboutUs } from './about-us/about-us';
 import { Courses } from './courses/courses';
-import { CourseView } from './course-view/course-view';
 import { courseResolver } from './services/course.resolver';
+import { CoursePage } from './course-page/course-page';
 
 export const routes: Routes = [
     {
@@ -16,7 +16,7 @@ export const routes: Routes = [
         title: 'About Us'
     }, {
         path: 'courses/:id',
-        component: CourseView,
+        component: CoursePage,
         resolve: {
             course: courseResolver
         }

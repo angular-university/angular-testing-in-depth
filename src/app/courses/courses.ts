@@ -1,6 +1,6 @@
 import { Component, signal, computed, inject, OnInit } from '@angular/core';
 import { CoursesCardList } from '../courses-card-list/courses-card-list';
-import { CoursesService } from '../services/courses';
+import { CoursesService } from '../services/courses.service';
 import { TabsComponent } from '../tabs/tabs';
 import { TabData } from '../tabs/tabs.model';
 import { CourseCategory } from '../model/course';
@@ -18,7 +18,7 @@ export class Courses implements OnInit {
   allCourses = this.courseService.allCourses;
   activeTab = signal<CourseCategory>('beginner');
 
-  courseTabs:TabData[] = [
+  courseTabs: TabData[] = [
     { label: 'Beginner', value: 'beginner' },
     { label: 'Advanced', value: 'advanced' }
   ];
@@ -36,7 +36,7 @@ export class Courses implements OnInit {
   }
 
   async reloadCourses() {
-    await this.courseService.findAllCourses();
+    this.courseService.findAllCourses();
   }
 
   onTabChanged(newTab: CourseCategory) {

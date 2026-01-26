@@ -19,10 +19,13 @@
             <input id="lesson-search" type="text" placeholder="Search lesson" #input (keyup)="onSearch(input.value)">
         </div>
 
-        @if (loading()) {
+        @if (lessonsResource.isLoading()) {
         <div class="spinner-container">
             <div class="loading-spinner"></div>
         </div>
+        }
+        @if (lessonsResource.error()) {
+        <div class="error">Error loading data: {{ lessonsResource.error() }}</div>
         }
         <table class="lessons-table">
             <thead>
