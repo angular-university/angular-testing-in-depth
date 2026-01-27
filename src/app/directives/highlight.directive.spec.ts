@@ -60,4 +60,18 @@ it('should apply default color (green) when no input is provided', () => {
     fixture.detectChanges();
     expect(el.style.backgroundColor).toBe('');
   });
+
+  it('should reset the color when the mouse leaves', () => {
+    const el = fixture.debugElement.query(By.css('#default-highlight')).nativeElement;
+    
+    el.dispatchEvent(new Event('mouseenter'));
+    fixture.detectChanges();
+    expect(el.style.backgroundColor).toBe('rgb(0, 128, 0)');
+
+    el.dispatchEvent(new Event('mouseleave'));
+    fixture.detectChanges();
+
+    expect(el.style.backgroundColor).toBe('');
+  });
+  
 });

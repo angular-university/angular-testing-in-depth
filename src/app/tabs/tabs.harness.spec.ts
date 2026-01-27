@@ -27,4 +27,27 @@ describe('TabsComponent with External Harness', () => {
     const labels = await harness.getTabLabels();
     expect(labels[0]).toBe(MOCK_TABS[0].label);
   });
+
+  it('should verify if a tab is active', async () => {
+    const isActive = await harness.isTabActive(MOCK_TABS[0].label);
+    expect(isActive).toBe(true);
+
+    const isInactive = await harness.isTabActive(MOCK_TABS[1].label);
+    expect(isInactive).toBe(false);
+
+    const nonExistent = await harness.isTabActive('Ghost Tab');
+    expect(nonExistent).toBe(false);
+  });
+
+  it('should select a tab by label', async () => {
+    await harness.selectTabByLabel(MOCK_TABS[1].label);
+    
+    const isActive = await harness.isTabActive(MOCK_TABS[1].label);
+    expect(isActive).toBe(true);
+  });
+
+  it('should throw error when selecting non-existent tab', async () => {
+    await expect(harness.selectTabByLabel('Non Existent'))
+      .rejects.toThrow('Tab with label "Non Existent" not found.');
+  });
 });

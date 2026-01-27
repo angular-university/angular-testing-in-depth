@@ -43,12 +43,12 @@ describe('CoursePage', () => {
   });
 
   it('should load lessons on init using resource', async () => {
-    fixture.detectChanges(); 
-    
-    appRef.tick(); 
-    
+    fixture.detectChanges();
+
+    appRef.tick();
+
     await appRef.whenStable();
-    
+
     fixture.detectChanges();
 
     expect(mockCoursesService.findLessons).toHaveBeenCalledWith(1, '', 'asc', 0, 3);
@@ -62,9 +62,9 @@ describe('CoursePage', () => {
     await appRef.whenStable();
 
     component.onSearch('advanced');
-    
-    await delay(450); 
-    
+
+    await delay(450);
+
     appRef.tick();
     await appRef.whenStable();
 
@@ -77,7 +77,7 @@ describe('CoursePage', () => {
     await appRef.whenStable();
 
     component.nextPage();
-    
+
     appRef.tick();
     await appRef.whenStable();
 
@@ -87,10 +87,10 @@ describe('CoursePage', () => {
 
   it('should update sorting and reset page', async () => {
     fixture.detectChanges();
-    component.pageIndex.set(5); 
-    
+    component.pageIndex.set(5);
+
     component.toggleSort();
-    
+
     appRef.tick();
     await appRef.whenStable();
 
@@ -107,4 +107,63 @@ describe('CoursePage', () => {
     expect(spinner).toBeTruthy();
     expect(component.loading()).toBe(true);
   });
+
+  it('should navigate to /courses when goBack() is called', () => {
+    const navigateSpy = vi.spyOn(mockRouter, 'navigate');
+
+    component.goBack();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/courses']);
+  });
+
+  it('should trigger goBack() when the back button is clicked in the UI', () => {
+    const goBackSpy = vi.spyOn(component, 'goBack');
+
+    const backButton = fixture.debugElement.query(By.css('.back-button'));
+
+    backButton.nativeElement.click();
+
+    expect(goBackSpy).toHaveBeenCalled();
+  });
+
+  it('should toggle sort direction and update the UI arrows', async () => {
+    fixture.detectChanges();
+    let sortBtn = fixture.debugElement.query(By.css('.sort-btn'));
+    expect(component.sortDirection()).toBe('asc');
+    expect(sortBtn.nativeElement.textContent).toContain('↑');
+
+    const sortHeader = fixture.debugElement.query(By.css('.sortable'));
+    sortHeader.triggerEventHandler('click', null);
+
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(component.sortDirection()).toBe('desc');
+    expect(component.pageIndex()).toBe(0);
+
+    sortBtn = fixture.debugElement.query(By.css('.sort-btn'));
+    expect(sortBtn.nativeElement.textContent).toContain('↓');
+  });
+
+  it('should update pageSize and reset pageIndex when selection changes', () => {
+    component.pageIndex.set(5);
+    component.pageSize.set(3);
+
+    const selectEl = fixture.debugElement.query(By.css('.items-label select')).nativeElement;
+
+    selectEl.value = '10';
+    selectEl.dispatchEvent(new Event('change'));
+
+    fixture.detectChanges();
+
+    expect(component.pageSize()).toBe(10);
+    expect(component.pageIndex()).toBe(0);
+  });
+
+  it('should decrement pageIndex when NOT on the first page', () => {
+    component.pageIndex.set(1);
+    component.prevPage();
+    expect(component.pageIndex()).toBe(0);
+  });
+  
 });

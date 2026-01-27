@@ -19,7 +19,7 @@ export class CoursesDialog {
   courseModel = signal<CourseData>({
     description: this.data.course.titles.description ?? '',
     category: this.data.course.category ?? '',
-    releasedAt: new Date().toISOString().split('T')[0], 
+    releasedAt: new Date().toISOString().split('T')[0] ?? Date.now(), 
     longDescription: this.data.course.titles.longDescription ?? ''
   });
 

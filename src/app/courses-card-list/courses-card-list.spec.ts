@@ -68,4 +68,17 @@ describe('CoursesCardList', () => {
         expect(emitSpy).toHaveBeenCalled();
 
     });
+
+    it('should display the "No courses found" message when the courses array is empty', () => {
+        fixture.componentRef.setInput('courses', []);
+
+        fixture.detectChanges();
+
+        const emptyMsg = fixture.debugElement.query(By.css('.no-courses'));
+
+        expect(emptyMsg).toBeTruthy();
+        expect(emptyMsg.nativeElement.textContent).toContain('No courses found.');
+    });
+
+
 });

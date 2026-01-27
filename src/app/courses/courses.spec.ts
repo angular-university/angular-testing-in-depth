@@ -9,6 +9,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
 import { ApplicationRef } from '@angular/core';
 import { MOCK_COURSES } from '../testing/test-data';
+import { CoursesCardList } from '../courses-card-list/courses-card-list';
 
 describe('Courses Component Integration', () => {
   let component: Courses;
@@ -42,18 +43,14 @@ describe('Courses Component Integration', () => {
   it('should load courses via the resource and filter them by category', async () => {
     fixture.detectChanges();
 
-    // 2. Resource effects are scheduled. We tick to trigger the HTTP request
     appRef.tick();
 
-    // 3. Intercept the request from the real service
-    const req = httpMock.expectOne('/api/courses'); // Adjust URL to your real endpoint
+    const req = httpMock.expectOne('/api/courses');
     req.flush({ payload: mockCourses });
 
-    // 4. Wait for the Resource signal to update from 'loading' to 'resolved'
     await appRef.whenStable();
-    fixture.detectChanges(); // Update the component UI with new signal values
+    fixture.detectChanges();
 
-    // Assertions
     expect(component.beginnerCourses()).toHaveLength(1);
     expect(component.advancedCourses()).toHaveLength(1);
     expect(component.beginnerCourses()[0].titles.description).toBe('Beginner Course');
@@ -88,4 +85,6 @@ describe('Courses Component Integration', () => {
     const emptyMsg = fixture.nativeElement.querySelector('.empty-msg');
     expect(emptyMsg.textContent).toContain('No advanced courses available');
   });
+
+
 });

@@ -10,7 +10,7 @@ import { Lesson } from "../model/lesson";
 export class CoursesService {
   private http = inject(HttpClient);
   
-  private courses = signal<Course[]>([]);
+  courses = signal<Course[]>([]);
   readonly allCourses = this.courses.asReadonly();
 
   async findCourseById(courseId: number): Promise<Course> {
