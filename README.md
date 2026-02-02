@@ -1,7 +1,7 @@
 
-##  Angular Testing In Depth
+##  Angular Testing In Depth (Signals Edition)
 
-This repository contains the code of the [ Angular Testing In Depth](#).
+This repository contains the code of the [ Angular Testing In Depth (Signals Editor)](https://angular-university.io/course/angular-testing-in-depth) course.
 
 This course repository is updated to Angular v21, and there is a  package-lock.json file available, for avoiding semantic versioning installation issues.
 
