@@ -1,9 +1,9 @@
 
-##  Angular Testing In Depth
+##  Angular Testing In Depth Course (Signals Edition)
 
-This repository contains the code of the [ Angular Testing In Depth](#).
+This repository contains the code of the [ Angular Testing In Depth (Signals Edition)](https://angular-university.io/course/angular-testing-in-depth) course.
 
-This course repository is updated to Angular v21, and there is a  package-lock.json file available, for avoiding semantic versioning installation issues.
+This course repository is updated to Angular v21.
 
 ![alt text](image.png)
 
@@ -25,16 +25,12 @@ We can install the master branch using the following commands:
 
     git clone https://github.com/angular-university/angular-testing-in-depth.git
     
-This repository is made of several separate npm modules, that are installable separately. For example, to run the au-input module, we can do the following:
+After cloning, it's recommended that you install using npm ci. This way you will get the exact dependencies of package-lock.json:
     
     cd angular-testing-in-depth
-    npm install
-
-Its also possible to install the modules as usual using npm:
+    npm ci
 
     npm install 
-
-NPM 5 or above has the big advantage that if you use it you will be installing the exact same dependencies than I installed in my machine, so you wont run into issues caused by semantic versioning updates.
 
 This should take a couple of minutes. If there are issues, please post the complete error message in the Questions section of the course.
 
@@ -51,28 +47,22 @@ This is a small Node REST API server.
 To run the frontend part of our code, we will use the Angular CLI:
 
     npm start 
+    
+or simply:
+
+    ng serve 
 
 The application is visible at port 4200: [http://localhost:4200](http://localhost:4200)
-
 
 
 # Important 
 
 This repository has multiple branches, have a look at the beginning of each section to see the name of the branch.
 
-At certain points along the course, you will be asked to checkout other remote branches other than master. You can view all branches that you have available remotely using the following command:
-
-    git branch -a
-
-  The remote branches have their starting in origin, such as for example 1-navigation-and-containers.
-
-We can checkout the remote branch and start tracking it with a local branch that has the same name, by using the following command:
-
-      git checkout -b section-1 origin/1-navigation-and-containers
-
 It's also possible to download a ZIP file for a given branch,  using the branch dropdown on this page on the top left, and then selecting the Clone or Download / Download as ZIP button.
 
 # Other Courses
+
 # Modern Angular With Signals
 
 If you are looking for the [Modern Angular With Signals Course](https://angular-university.io/course/angular-signals-course), the repo with the full code can be found here:
