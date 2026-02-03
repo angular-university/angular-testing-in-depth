@@ -1,5 +1,5 @@
 
-##  Angular Testing In Depth Course (Signals Edition)
+##  Angular Testing In Depth (Signals Edition) Course
 
 This repository contains the code of the [ Angular Testing In Depth (Signals Edition)](https://angular-university.io/course/angular-testing-in-depth) course.
 
