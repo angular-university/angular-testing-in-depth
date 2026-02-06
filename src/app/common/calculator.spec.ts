@@ -17,7 +17,7 @@ describe("Vitest Fundamentals", () => {
     expect(spy).toHaveBeenCalledWith(2, 3);
   })
 
-  it.only("shows how mocking works", () => {
+  it("shows how mocking works", () => {
     const spy = vi.spyOn(calculator, "add").mockReturnValue(5);
     const result = calculator.add(2, 3);
     expect(result).toBe(5);
@@ -25,6 +25,14 @@ describe("Vitest Fundamentals", () => {
     expect(spy).toHaveBeenCalledWith(2, 3);
     const result2 = calculator.add(5, 5);
     expect(result2).toBe(10);
+  })
+
+  it.only("shows how a pure mock works", () => {
+    const addMock = vi.fn().mockReturnValue(10);
+    const result = addMock(5, 5);
+    expect(result).toBe(10);
+    expect(addMock).toHaveBeenCalledOnce();
+    expect(addMock).toHaveBeenCalledWith(5, 5);
   })
 
 });
