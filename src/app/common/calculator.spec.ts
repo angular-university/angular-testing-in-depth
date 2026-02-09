@@ -46,7 +46,7 @@ describe("Vitest Fundamentals", () => {
     expect(spy).toHaveBeenCalledOnce();
   })
 
-  it.only("shows how mockReset() works for spies", () => {
+  it("shows how mockReset() works for spies", () => {
     const spy = vi.spyOn(calculator, "add");
     spy.mockReturnValue(10);
     const result = calculator.add(2, 3);
@@ -59,7 +59,7 @@ describe("Vitest Fundamentals", () => {
 
   })
 
-  it.only("shows how mockReset() works for pure mocks", () => {
+  it("shows how mockReset() works for pure mocks", () => {
     const addMock = vi.fn().mockReturnValue(10);
     const result = addMock(5, 5);
     expect(result).toBe(10);
@@ -69,6 +69,18 @@ describe("Vitest Fundamentals", () => {
     const result2 = addMock(5, 5);
     expect(result2).toBe(undefined);
     expect(addMock).toHaveBeenCalledOnce();
+  })
+
+  it.only("shows how mockRestore() works", () => {
+    const spy = vi.spyOn(calculator, "add");
+    spy.mockReturnValue(10);
+    const result = calculator.add(2, 3);
+    expect(result).toBe(10);
+    expect(spy).toHaveBeenCalledOnce();
+    spy.mockRestore();
+    const result2 = calculator.add(2, 3);
+    expect(result2).toBe(5);
+    expect(spy).toHaveBeenCalledTimes(0);
   })
 
 });
