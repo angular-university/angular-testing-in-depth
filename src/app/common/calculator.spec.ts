@@ -1,5 +1,5 @@
 
-import {describe, it, expect, vi} from 'vitest';
+import {describe, it, expect, vi, beforeEach} from 'vitest';
 import {calculator} from "./calculator";
 
 describe("Vitest Fundamentals", () => {
@@ -24,7 +24,7 @@ describe("Vitest Fundamentals", () => {
     expect(spy).toHaveBeenCalledOnce();
     expect(spy).toHaveBeenCalledWith(2, 3);
     const result2 = calculator.add(5, 5);
-    expect(result2).toBe(10);
+    expect(result2).toBe(5);
   })
 
   it("shows how a pure mock works", () => {
@@ -71,7 +71,7 @@ describe("Vitest Fundamentals", () => {
     expect(addMock).toHaveBeenCalledOnce();
   })
 
-  it.only("shows how mockRestore() works", () => {
+  it("shows how mockRestore() works", () => {
     const spy = vi.spyOn(calculator, "add");
     spy.mockReturnValue(10);
     const result = calculator.add(2, 3);
