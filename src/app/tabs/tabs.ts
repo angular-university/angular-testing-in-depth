@@ -8,11 +8,13 @@ import { CourseCategory } from '../model/course';
   styleUrl: './tabs.scss',
 })
 export class TabsComponent {
+
   tabs = input.required<TabData[]>();
+
+  tabChanged = output<CourseCategory>();
 
   activeTab = model<string>();
 
-  tabChanged = output<CourseCategory>();
 
   selectTab(val: any) {
     this.activeTab.set(val);
