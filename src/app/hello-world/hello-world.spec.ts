@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {HelloWorld} from './hello-world';
 import {DebugElement} from '@angular/core';
 
-describe.only('HelloWorld', () => {
+describe('HelloWorld', () => {
   let fixture: ComponentFixture<HelloWorld>;
   let de: DebugElement;
   let el: HTMLElement;
