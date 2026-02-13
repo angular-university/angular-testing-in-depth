@@ -1,37 +1,26 @@
-import {describe, expect, it} from 'vitest';
-import {ComponentFixture} from '@angular/core/testing';
+import {beforeEach, describe, expect, it} from 'vitest';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {TabsComponent} from '../tabs/tabs';
 import {TabData} from '../tabs/tabs.model';
 import {MOCK_TABS} from '../testing/testing-data';
-
 
 describe("TabsComponent", () => {
   let component: TabsComponent;
   let fixture: ComponentFixture<TabsComponent>;
   const mockTabs: TabData[] = MOCK_TABS;
 
-  it("should create tabs component", () => {
-
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TabsComponent]
+    }).compileComponents();
+    fixture = TestBed.createComponent(TabsComponent);
+    component = fixture.componentInstance;
+    fixture.componentRef.setInput("tabs", mockTabs);
+    fixture.detectChanges();
   })
 
-  it("should render the correct number of tab buttons", () => {
-
-  })
-
-  it("should apply the active class to the selected tab", () => {
-
-  })
-
-  it("should emit tabChanged when a new tab is clicked", () => {
-
-  })
-
-  it("should emit activeTab model when a new tab is clicked", () => {
-
-  })
-
-  it("should select the right tab when activeTab changes", () => {
-
+  it("should create the tabs component", () => {
+    expect(component).toBeDefined();
   })
 
 })
