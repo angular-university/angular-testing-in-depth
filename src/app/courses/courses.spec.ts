@@ -57,7 +57,4 @@ describe("TabsComponent", () => {
     expect(emitSpy).toHaveBeenCalledOnce();
   });
 
-
-
-
 })
