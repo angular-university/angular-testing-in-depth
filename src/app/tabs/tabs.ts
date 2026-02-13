@@ -15,7 +15,6 @@ export class TabsComponent {
 
   activeTab = model<string>();
 
-
   selectTab(val: any) {
     this.activeTab.set(val);
     this.tabChanged.emit(val);
