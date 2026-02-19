@@ -1,7 +1,7 @@
 import {beforeEach, describe, expect, it, vi} from 'vitest';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {TabsComponent} from '../tabs/tabs';
-import {TabData} from '../tabs/tabs.model';
+import {TabsComponent} from './tabs';
+import {TabData} from './tabs.model';
 import {MOCK_TABS} from '../testing/testing-data';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
