@@ -1,4 +1,4 @@
-import {Component, DebugElement} from '@angular/core';
+import {Component, DebugElement, ChangeDetectionStrategy} from '@angular/core';
 import {HighlightDirective} from './highlight.directive';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {describe, beforeEach, it, expect} from "vitest";
@@ -6,6 +6,7 @@ import {By} from '@angular/platform-browser';
 
 @Component({
   imports: [HighlightDirective],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div id="default-highlight" appHighlight>Default Color</div>
     <div id="custom-highlight" appHighlight highlightColor="rgb(0, 0, 255)">

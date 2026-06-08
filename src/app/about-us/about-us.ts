@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import {HelloWorld} from '../hello-world/hello-world';
 
 @Component({
@@ -7,6 +7,7 @@ import {HelloWorld} from '../hello-world/hello-world';
     HelloWorld
   ],
   templateUrl: './about-us.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './about-us.scss',
 })
 export class AboutUs {

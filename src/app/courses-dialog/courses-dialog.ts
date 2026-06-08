@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Course, CourseData } from '../model/course';
 import { CoursesService } from '../services/courses.service';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
@@ -8,6 +8,7 @@ import { form, required, submit,FormField} from '@angular/forms/signals';
   selector: 'courses-dialog',
   imports: [FormField],
   templateUrl: './courses-dialog.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './courses-dialog.scss',
 })
 export class CoursesDialog {

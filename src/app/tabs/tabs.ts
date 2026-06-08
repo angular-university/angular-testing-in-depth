@@ -1,10 +1,11 @@
-import { Component, input, output, model } from '@angular/core';
+import { Component, input, output, model, ChangeDetectionStrategy } from '@angular/core';
 import { TabData } from './tabs.model';
 import { CourseCategory } from '../model/course';
 @Component({
   selector: 'tabs',
   imports: [],
   templateUrl: './tabs.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './tabs.scss',
 })
 export class TabsComponent {
