@@ -1,4 +1,4 @@
-import { Component, signal, computed, inject, OnInit } from '@angular/core';
+import { Component, signal, computed, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CoursesCardList } from '../courses-card-list/courses-card-list';
 import { CoursesService } from '../services/courses.service';
 import { TabsComponent } from '../tabs/tabs';
@@ -9,6 +9,7 @@ import { CourseCategory } from '../model/course';
   selector: 'courses',
   imports: [CoursesCardList, TabsComponent],
   templateUrl: './courses.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./courses.scss']
 })
 export class Courses implements OnInit {

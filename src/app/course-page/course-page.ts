@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, resource, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, resource, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Course } from '../model/course';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../services/courses.service';
@@ -11,6 +11,7 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
   selector: 'course-page',
   imports: [DurationFormatPipe, HighlightDirective],
   templateUrl: './course-page.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './course-page.scss',
 })
 export class CoursePage implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, input, output, inject } from '@angular/core';
+import { Component, input, output, inject, ChangeDetectionStrategy } from '@angular/core';
 import { Course } from '../model/course';
 import { Dialog } from '@angular/cdk/dialog';
 import { CoursesDialog } from '../courses-dialog/courses-dialog';
@@ -8,6 +8,7 @@ import { RouterLink } from '@angular/router';
   selector: 'courses-card-list',
   templateUrl: './courses-card-list.html',
   styleUrl: './courses-card-list.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RouterLink],
 })
 export class CoursesCardList {

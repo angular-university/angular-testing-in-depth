@@ -3,14 +3,14 @@
 
 This repository contains the code of the [ Angular Testing In Depth (Signals Edition)](https://angular-university.io/course/angular-testing-in-depth) course.
 
-This course repository is updated to Angular v21.
+This course repository is updated to Angular v22.
 
 ![alt text](image.png)
 
 
 # Installation pre-requisites
 
-Please install Node 22 Long Term Support Edition (LTE).
+Please install Node 24 Long Term Support Edition (LTE).
 
 # Installing the Angular CLI
 
