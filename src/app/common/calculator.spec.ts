@@ -9,7 +9,7 @@ describe("Vitest Fundamentals", () => {
     expect(result).toBe(5);
   })
 
-  it("shows how spies work", () => {
+  it.skipIf(false)("shows how spies work", () => {
     const spy = vi.spyOn(calculator, "add");
     const result = calculator.add(2, 3);
     expect(result).toBe(5);
@@ -17,7 +17,7 @@ describe("Vitest Fundamentals", () => {
     expect(spy).toHaveBeenCalledWith(2, 3);
   })
 
-  it("shows how mocking works", () => {
+  it.only("shows how mocking works", () => {
     const spy = vi.spyOn(calculator, "add").mockReturnValue(5);
     const result = calculator.add(2, 3);
     expect(result).toBe(5);

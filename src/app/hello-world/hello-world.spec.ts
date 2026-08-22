@@ -27,6 +27,7 @@ describe('HelloWorld', () => {
   it('should display the message', () => {
     const h1 = el.querySelector("h1");
     expect(h1).toBeDefined();
+    console.log(h1)
     expect(h1?.textContent).toEqual(component.message);
   })
 
